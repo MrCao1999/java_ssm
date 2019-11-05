@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		     <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[time: %r] |-[%t][%c] [%p]  |- [%logger{50}]:%m%n</pattern>
+<!--             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[time: %r] |- in [%t] [%c] [%p] |- [%logger{50}]:%m%n</pattern> -->
+        </encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<File>/opt/logs/sign/loback-log.log</File>
+    	<prudent>true</prudent>
+　　　　<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+     		<fileNamePattern>/opt/logs/sign/loback-log-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>365</maxHistory>
+　　　　</rollingPolicy> 
+　　　　<encoder> 
+　　　　　　<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[time: %r][%t] [%c] [level:%p][%logger{50}]:%m%n</pattern> 
+　　　　</encoder> 
+　　</appender> 
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+	<logger name="com.apache.ibatis" level="TRACE"/>
+	<logger name="com.mysql.jdbc" level="DEBUG"/>
+	<logger name="java.sql.Connection" level="DEBUG"/>
+	<logger name="java.sql.Statement" level="DEBUG"/>
+	<logger name="java.sql.PreparedStatement" level="DEBUG"/>
+	<logger name="org.apache.ibatis.common.jdbc.SimpleDataSource" level="INFO"/>
+	<logger name="org.apache.ibatis.common.jdbc.ScriptRunner" level="INFO"/>
+	<logger name="org.apache.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="INFO"/>
+	<logger name="net.rubyeye.xmemcached" level="error"/>
+	<logger name="net.sf.ehcache" level="error"/>
+	<logger name="org.springframework" level="INFO"/>
+	<logger name="org.springframework.jms" level="FATAL"/>
+	<logger name="org.springframework.data" level="INFO"/>
+	<logger name="springfox.documentation" level="INFO"/>
+	<logger name="org.hibernate" level="INFO"/>
+	<logger name="org.thymeleaf" level="INFO"/>
+	<logger name="org.mybatis.spring.SqlSessionUtils" level="INFO"/>
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 扫描 -->
+<context:component-scan base-package="com.java"/>
+<!-- dataSource -->
+<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring-jdbc"/>
+	<property name="user" value="root"/>
+	<property name="password" value="123456"/>
+</bean>
+<!-- mybatis -->
+<bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="configLocation" value="classpath:sqlMapconfig.xml"></property>
+</bean>
+<!-- mapper工厂 -->
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+<property name="basePackage" value="com.java.spring.look.web.mapper"/>
+</bean>
+
+</beans>
